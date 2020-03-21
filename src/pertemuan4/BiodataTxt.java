@@ -46,8 +46,7 @@ public class BiodataTxt extends javax.swing.JFrame {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             int baris = 0;
             while ((line = bufferedReader.readLine()) != null) {
-//                System.out.println(line);
-//                System.out.println(baris);
+//              
                 switch (baris) {
                     case 0:
                         nama.setText(line);
@@ -640,7 +639,7 @@ public class BiodataTxt extends javax.swing.JFrame {
             SaveData();
             gambar.setIcon(null);
             ReadImage(pathImage.getText());
-            
+
         } else {
         }
     }//GEN-LAST:event_saveActionPerformed
