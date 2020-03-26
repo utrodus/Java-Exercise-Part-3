@@ -22,6 +22,7 @@ import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import java.util.ArrayList;
 
 /**
  *
@@ -50,6 +51,8 @@ public class ConverterApp extends javax.swing.JFrame {
             if (!filename.endsWith(".txt")) {
                 filename += ".txt";
             }
+            pathFileAkhir.setText(filename);
+
             // Baca File Doc
             File docFile = new File(path);
             WordExtractor extractor = null;
@@ -58,6 +61,7 @@ public class ConverterApp extends javax.swing.JFrame {
                 HWPFDocument document = new HWPFDocument(fis);
                 extractor = new WordExtractor(document);
                 String fileText = extractor.getText();
+//                System.out.println(fileText);
                 WriteTxt(filename, fileText);
             } catch (Exception exep) {
                 exep.printStackTrace();
@@ -74,19 +78,21 @@ public class ConverterApp extends javax.swing.JFrame {
             if (!filename.endsWith(".doc")) {
                 filename += ".doc";
             }
+            pathFileAkhir.setText(filename);
 
             // Baca File Txt
             String line = null;
-            String fileText = "";
+            ArrayList textFile = new ArrayList();
             try {
                 FileReader fileReader = new FileReader(path);
                 // membaca input file / isi file
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 while ((line = bufferedReader.readLine()) != null) {
-                    fileText += line + System.getProperty("line.separator");
+                    textFile.add(line);
                 }
                 bufferedReader.close();
-                WriteDoc(filename, fileText);
+                WriteDoc(filename, textFile);
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "File Tidak Ada");
             }
@@ -117,21 +123,32 @@ public class ConverterApp extends javax.swing.JFrame {
         }
     }
 
-    public void WriteDoc(String filePath, String fileText) {
+    public void WriteDoc(String filePath, ArrayList textFile) {
         try {
+
             Properties prop = new Properties();
             prop.setProperty("log4j.rootLogger", "WARN");
 
+            // membuat dokumen
             String outDocEn = filePath;
             XWPFDocument document = new XWPFDocument();
+
+            // membuat file
             FileOutputStream out = new FileOutputStream(new File(outDocEn));
-            XWPFParagraph paragraph = document.createParagraph();
-            XWPFRun run = paragraph.createRun();
-            run.setText(fileText);
+
+            // membuat paragraf
+            for (int i = 0; i < textFile.size(); i++) {
+                XWPFParagraph paragraph = document.createParagraph();
+                XWPFRun run = paragraph.createRun();
+                run.setText(String.valueOf(textFile.get(i)));
+            }
+
             document.write(out);
             out.close();
 
+            JOptionPane.showMessageDialog(null, "Convert ke Doc Berhasil");
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println(e);
         }
     }

@@ -9,6 +9,7 @@ package pertemuan4;
 import java.io.BufferedReader;
 import java.io.FileReader;
 //import java.io.InputStreamReader;
+
 /**
  *
  * @author Utrodus
@@ -16,10 +17,12 @@ import java.io.FileReader;
 public class txtFile {
 
     public static void main(String[] args) {
-        String fileName = "C://input.txt";
+        // cara ketiga dengan kata kunci new
+
+        String fileName = "/Users/utrodus/Documents/biodata.txt";
 
         String line = null;
-
+        int baris = 0;
         try {
             // membaca file
             FileReader fileReader = new FileReader(fileName);
@@ -28,10 +31,12 @@ public class txtFile {
 
             while ((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
+                baris++;
             }
             
+
             bufferedReader.close();
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
