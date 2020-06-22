@@ -366,9 +366,10 @@ public class ConverterApp extends javax.swing.JFrame {
 
                     if (".txt".equals(fileExtention)) {
                         convertDoc.setEnabled(true);
+                        convertDocx.setEnabled(true);
                         convertTxt.setEnabled(false);
 
-                    } else if (".doc".equals(fileExtention)) {
+                    } else if (".doc".equals(fileExtention) || ".docx".equals(fileExtention)) {
                         convertTxt.setEnabled(true);
                         convertDoc.setEnabled(false);
                     }
