@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pertemuan5;
+package pertemuan7;
 
 /**
  *
  * @author utrodus
  */
-public class writeDoc {
+public class readXls {
     public static void main(String[] args) {
         
     }

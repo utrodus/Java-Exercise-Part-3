@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pertemuan5;
+package UTS;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,6 +39,7 @@ public class ConverterApp extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         convertTxt.setEnabled(false);
         convertDoc.setEnabled(false);
+        convertDocx.setEnabled(false);
 
     }
 
@@ -166,10 +167,12 @@ public class ConverterApp extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         openFile = new javax.swing.JButton();
-        convertTxt = new javax.swing.JButton();
         convertDoc = new javax.swing.JButton();
+        convertTxt = new javax.swing.JButton();
+        convertDocx = new javax.swing.JButton();
         pathFileAwal = new javax.swing.JTextField();
         pathFileAkhir = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -180,13 +183,18 @@ public class ConverterApp extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Lato", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(34, 109, 213));
-        jLabel1.setText("Aplikasi Converter File (Doc - Txt & Txt - Doc)");
+        jLabel1.setText("Aplikasi Converter File ");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pertemuan5/img/convert.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS/convert.png"))); // NOI18N
 
+        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         jLabel5.setText("Oleh : Utrodus Said Al Baqi");
+
+        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel6.setText("(.txt - .doc - .docx)");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -197,7 +205,10 @@ public class ConverterApp extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6))
                     .addComponent(jLabel5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -207,7 +218,9 @@ public class ConverterApp extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5))
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -217,9 +230,9 @@ public class ConverterApp extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(34, 109, 213));
 
         openFile.setBackground(new java.awt.Color(255, 255, 255));
-        openFile.setFont(new java.awt.Font("Lato", 1, 13)); // NOI18N
+        openFile.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         openFile.setForeground(new java.awt.Color(51, 51, 51));
-        openFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pertemuan5/img/files-and-folders.png"))); // NOI18N
+        openFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS/files-and-folders.png"))); // NOI18N
         openFile.setText("Cari File");
         openFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,10 +240,21 @@ public class ConverterApp extends javax.swing.JFrame {
             }
         });
 
+        convertDoc.setBackground(new java.awt.Color(255, 255, 255));
+        convertDoc.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        convertDoc.setForeground(new java.awt.Color(51, 51, 51));
+        convertDoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS/convert-icon.png"))); // NOI18N
+        convertDoc.setText("Convert ke .doc ");
+        convertDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                convertDocActionPerformed(evt);
+            }
+        });
+
         convertTxt.setBackground(new java.awt.Color(255, 255, 255));
-        convertTxt.setFont(new java.awt.Font("Lato", 1, 13)); // NOI18N
+        convertTxt.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         convertTxt.setForeground(new java.awt.Color(51, 51, 51));
-        convertTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pertemuan5/img/convert-icon.png"))); // NOI18N
+        convertTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS/convert-icon.png"))); // NOI18N
         convertTxt.setText("Convert ke .txt");
         convertTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,14 +262,14 @@ public class ConverterApp extends javax.swing.JFrame {
             }
         });
 
-        convertDoc.setBackground(new java.awt.Color(255, 255, 255));
-        convertDoc.setFont(new java.awt.Font("Lato", 1, 13)); // NOI18N
-        convertDoc.setForeground(new java.awt.Color(51, 51, 51));
-        convertDoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pertemuan5/img/convert-icon.png"))); // NOI18N
-        convertDoc.setText("Convert ke .doc");
-        convertDoc.addActionListener(new java.awt.event.ActionListener() {
+        convertDocx.setBackground(new java.awt.Color(255, 255, 255));
+        convertDocx.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        convertDocx.setForeground(new java.awt.Color(51, 51, 51));
+        convertDocx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS/convert-icon.png"))); // NOI18N
+        convertDocx.setText("Convert ke .docx");
+        convertDocx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                convertDocActionPerformed(evt);
+                convertDocxActionPerformed(evt);
             }
         });
 
@@ -254,24 +278,25 @@ public class ConverterApp extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addContainerGap()
                 .addComponent(openFile, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(convertTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(convertDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(convertTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(convertDoc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(convertDocx, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(convertTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(openFile, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(convertDoc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(openFile, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(convertDoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(convertDocx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -300,8 +325,8 @@ public class ConverterApp extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
                     .addComponent(pathFileAwal)
-                    .addComponent(pathFileAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addComponent(pathFileAkhir, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,7 +340,7 @@ public class ConverterApp extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pathFileAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -346,7 +371,6 @@ public class ConverterApp extends javax.swing.JFrame {
                     } else if (".doc".equals(fileExtention)) {
                         convertTxt.setEnabled(true);
                         convertDoc.setEnabled(false);
-
                     }
                 }
             } catch (Exception e) {
@@ -366,6 +390,10 @@ public class ConverterApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         convertToDoc(pathFileAwal.getText());
     }//GEN-LAST:event_convertDocActionPerformed
+
+    private void convertDocxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertDocxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_convertDocxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,12 +432,14 @@ public class ConverterApp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton convertDoc;
+    private javax.swing.JButton convertDocx;
     private javax.swing.JButton convertTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton openFile;
