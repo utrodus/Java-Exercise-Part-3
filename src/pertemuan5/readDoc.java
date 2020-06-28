@@ -17,10 +17,10 @@ import org.apache.poi.hwpf.extractor.WordExtractor;
 public class readDoc {
 
     public static void main(String[] args) {
-        File filenya = new File("/Users/utrodus/Documents/doc/1.doc");
-        WordExtractor extractor = null;
 
         try {
+            File filenya = new File("testdoc.doc");
+            WordExtractor extractor = null;
             FileInputStream fis = new FileInputStream(filenya.getAbsolutePath());
             HWPFDocument document = new HWPFDocument(fis);
             extractor = new WordExtractor(document);

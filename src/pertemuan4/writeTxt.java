@@ -4,13 +4,37 @@
  * and open the template in the editor.
  */
 package pertemuan4;
-
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author utrodus
  */
 public class writeTxt {
     public static void main(String[] args) {
-        
+          File file = new File("coba.txt");
+        FileWriter fr = null;
+        BufferedWriter br = null;
+       String fileText = "Halo Saya menulis text di TXT dengan JAVA";
+        try {
+            fr = new FileWriter(file);
+            br = new BufferedWriter(fr);
+
+            br.write(fileText);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                JOptionPane.showMessageDialog(null, "Convert ke Txt Berhasil");
+                br.close();
+                fr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
