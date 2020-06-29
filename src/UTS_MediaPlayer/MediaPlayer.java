@@ -5,6 +5,7 @@
  */
 package UTS_MediaPlayer;
 
+import jaco.mp3.player.MP3Player;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
@@ -32,6 +33,10 @@ public class MediaPlayer extends javax.swing.JFrame {
 
     AudioInputStream audioInputStream;
     static String filePath;
+    // Define MP3Player Class From JACO MP3Player Lib
+    MP3Player player;
+    // Define File For Song
+    File songFile;
 
     /**
      * Creates new form MediaPlayer
@@ -43,6 +48,13 @@ public class MediaPlayer extends javax.swing.JFrame {
         play.setEnabled(false);
         pause.setEnabled(false);
         stop.setEnabled(false);
+        // Add our method to player variable
+        player = mp3Player();
+    }
+
+    private MP3Player mp3Player() {
+        MP3Player mp3Player = new MP3Player();
+        return mp3Player;
     }
 
     public void WavPlayer() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
@@ -81,10 +93,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         currentFrame = 0L;
         clip.stop();
         clip.close();
-        songName.setText("Silahkan Cari Audio");
-        play.setEnabled(false);
-        pause.setEnabled(false);
-        stop.setEnabled(false);
+
     }
 
     /**
@@ -242,6 +251,8 @@ public class MediaPlayer extends javax.swing.JFrame {
                     stop.setEnabled(true);
                     if (".wav".equals(fileExtention)) {
                         WavPlayer();
+                    } else {
+                        player.addToPlayList(chooser.getSelectedFile());
                     }
                 }
             } catch (Exception e) {
@@ -257,6 +268,8 @@ public class MediaPlayer extends javax.swing.JFrame {
         findFile.setEnabled(false);
         if (".wav".equals(fileExtention)) {
             playWav();
+        } else {
+            player.play();
         }
 
     }//GEN-LAST:event_playActionPerformed
@@ -266,11 +279,17 @@ public class MediaPlayer extends javax.swing.JFrame {
         findFile.setEnabled(false);
         if (".wav".equals(fileExtention)) {
             pauseWav();
+        } else {
+            player.pause();
         }
     }//GEN-LAST:event_pauseActionPerformed
 
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
         // TODO add your handling code here:
+        songName.setText("Silahkan Cari Audio");
+        play.setEnabled(false);
+        pause.setEnabled(false);
+        stop.setEnabled(false);
         findFile.setEnabled(true);
         if (".wav".equals(fileExtention)) {
             try {
@@ -278,6 +297,8 @@ public class MediaPlayer extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println(e);
             }
+        } else {
+            player.stop();
         }
 
     }//GEN-LAST:event_stopActionPerformed
