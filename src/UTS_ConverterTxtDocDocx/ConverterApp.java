@@ -3,22 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UTS;
+package UTS_ConverterTxtDocDocx;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.util.Properties;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.extractor.WordExtractor;
+
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -37,37 +33,9 @@ public class ConverterApp extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Aplikasi Converter File");
         this.setLocationRelativeTo(this);
-        convertTxt.setEnabled(false);
         convertDoc.setEnabled(false);
         convertDocx.setEnabled(false);
 
-    }
-
-    public void convertToTxt(String path) {
-        JFileChooser chooser = new JFileChooser(".");
-        chooser.setFileFilter(new FileNameExtensionFilter(".txt", "txt"));
-        int buka_dialog = chooser.showSaveDialog(ConverterApp.this);
-        if (buka_dialog == JFileChooser.APPROVE_OPTION) {
-            String filename = chooser.getSelectedFile().toString();
-            if (!filename.endsWith(".txt")) {
-                filename += ".txt";
-            }
-            pathFileAkhir.setText(filename);
-
-            // Baca File Doc
-            File docFile = new File(path);
-            WordExtractor extractor = null;
-            try {
-                FileInputStream fis = new FileInputStream(docFile.getAbsolutePath());
-                HWPFDocument document = new HWPFDocument(fis);
-                extractor = new WordExtractor(document);
-                String fileText = extractor.getText();
-//                System.out.println(fileText);
-                WriteTxt(filename, fileText);
-            } catch (Exception exep) {
-                exep.printStackTrace();
-            }
-        }
     }
 
     public void convertToDoc(String path) {
@@ -101,26 +69,34 @@ public class ConverterApp extends javax.swing.JFrame {
         }
     }
 
-    public void WriteTxt(String filePath, String fileText) {
-        File file = new File(filePath);
-        FileWriter fr = null;
-        BufferedWriter br = null;
-        try {
-            fr = new FileWriter(file);
-            br = new BufferedWriter(fr);
-
-            br.write(fileText);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                JOptionPane.showMessageDialog(null, "Convert ke Txt Berhasil");
-                br.close();
-                fr.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+    public void convertToDocx(String path) {
+        JFileChooser chooser = new JFileChooser(".");
+        chooser.setFileFilter(new FileNameExtensionFilter(".docx", "docx"));
+        int buka_dialog = chooser.showSaveDialog(ConverterApp.this);
+        if (buka_dialog == JFileChooser.APPROVE_OPTION) {
+            String filename = chooser.getSelectedFile().toString();
+            if (!filename.endsWith(".docx")) {
+                filename += ".docx";
             }
+            pathFileAkhir.setText(filename);
+
+            // Baca File Txt
+            String line = null;
+            ArrayList textFile = new ArrayList();
+            try {
+                FileReader fileReader = new FileReader(path);
+                // membaca input file / isi file
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                while ((line = bufferedReader.readLine()) != null) {
+                    textFile.add(line);
+                }
+                bufferedReader.close();
+                WriteDocx(filename, textFile);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "File Tidak Ada");
+            }
+
         }
     }
 
@@ -153,6 +129,35 @@ public class ConverterApp extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
+    public void WriteDocx(String filePath, ArrayList textFile) {
+        try {
+
+            Properties prop = new Properties();
+            prop.setProperty("log4j.rootLogger", "WARN");
+
+            // membuat dokumen
+            String outDocEn = filePath;
+            XWPFDocument document = new XWPFDocument();
+
+            // membuat file
+            FileOutputStream out = new FileOutputStream(new File(outDocEn));
+
+            // membuat paragraf
+            for (int i = 0; i < textFile.size(); i++) {
+                XWPFParagraph paragraph = document.createParagraph();
+                XWPFRun run = paragraph.createRun();
+                run.setText(String.valueOf(textFile.get(i)));
+            }
+
+            document.write(out);
+            out.close();
+
+            JOptionPane.showMessageDialog(null, "Convert ke Docx Berhasil");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -171,7 +176,6 @@ public class ConverterApp extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         openFile = new javax.swing.JButton();
         convertDoc = new javax.swing.JButton();
-        convertTxt = new javax.swing.JButton();
         convertDocx = new javax.swing.JButton();
         pathFileAwal = new javax.swing.JTextField();
         pathFileAkhir = new javax.swing.JTextField();
@@ -187,14 +191,14 @@ public class ConverterApp extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(34, 109, 213));
         jLabel1.setText("Aplikasi Converter File ");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS/convert.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS_ConverterTxtDocDocx/convert.png"))); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         jLabel5.setText("Oleh : Utrodus Said Al Baqi");
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("(.txt - .doc - .docx)");
+        jLabel6.setText("(.txt -> .doc / .docx)");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -232,8 +236,8 @@ public class ConverterApp extends javax.swing.JFrame {
         openFile.setBackground(new java.awt.Color(255, 255, 255));
         openFile.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         openFile.setForeground(new java.awt.Color(51, 51, 51));
-        openFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS/files-and-folders.png"))); // NOI18N
-        openFile.setText("Cari File");
+        openFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS_ConverterTxtDocDocx/files-and-folders.png"))); // NOI18N
+        openFile.setText("Cari File .txt");
         openFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openFileActionPerformed(evt);
@@ -243,7 +247,7 @@ public class ConverterApp extends javax.swing.JFrame {
         convertDoc.setBackground(new java.awt.Color(255, 255, 255));
         convertDoc.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         convertDoc.setForeground(new java.awt.Color(51, 51, 51));
-        convertDoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS/convert-icon.png"))); // NOI18N
+        convertDoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS_ConverterTxtDocDocx/convert-icon.png"))); // NOI18N
         convertDoc.setText("Convert ke .doc ");
         convertDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,21 +255,10 @@ public class ConverterApp extends javax.swing.JFrame {
             }
         });
 
-        convertTxt.setBackground(new java.awt.Color(255, 255, 255));
-        convertTxt.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        convertTxt.setForeground(new java.awt.Color(51, 51, 51));
-        convertTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS/convert-icon.png"))); // NOI18N
-        convertTxt.setText("Convert ke .txt");
-        convertTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                convertTxtActionPerformed(evt);
-            }
-        });
-
         convertDocx.setBackground(new java.awt.Color(255, 255, 255));
         convertDocx.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         convertDocx.setForeground(new java.awt.Color(51, 51, 51));
-        convertDocx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS/convert-icon.png"))); // NOI18N
+        convertDocx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTS_ConverterTxtDocDocx/convert-icon.png"))); // NOI18N
         convertDocx.setText("Convert ke .docx");
         convertDocx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,22 +271,19 @@ public class ConverterApp extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(openFile, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(convertTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(convertDoc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(convertDocx, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addComponent(openFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(convertDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(convertDocx, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(convertTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(openFile, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(convertDoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(convertDocx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -349,9 +339,9 @@ public class ConverterApp extends javax.swing.JFrame {
 
     private void openFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileActionPerformed
         // TODO add your handling code here:
-        // TODO add your handling code here:
         File filenya;
         JFileChooser chooser = new JFileChooser(".");
+        chooser.setFileFilter(new FileNameExtensionFilter(".txt", "txt"));
         int buka_dialog = chooser.showOpenDialog(ConverterApp.this);
         if (buka_dialog == JFileChooser.APPROVE_OPTION) {
             filenya = chooser.getSelectedFile();
@@ -359,20 +349,14 @@ public class ConverterApp extends javax.swing.JFrame {
             String fileName = filenya.getName();
             try {
                 String fileExtention = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-                if (!".doc".equals(fileExtention) && !".txt".equals(fileExtention)) {
-                    JOptionPane.showMessageDialog(null, "Maaf ! Hanya dapat menerima Format File .txt atau .doc ");
+                if (!".txt".equals(fileExtention)) {
+                    JOptionPane.showMessageDialog(null, "Maaf ! Hanya dapat menerima Format File .txt");
                 } else {
                     pathFileAwal.setText(filePath);
 
                     if (".txt".equals(fileExtention)) {
                         convertDoc.setEnabled(true);
                         convertDocx.setEnabled(true);
-                        convertTxt.setEnabled(false);
-
-                    } else if (".doc".equals(fileExtention) || ".docx".equals(fileExtention)) {
-                        convertTxt.setEnabled(true);
-                        convertDoc.setEnabled(false);
-                        convertDocx.setEnabled(false);
                     }
                 }
             } catch (Exception e) {
@@ -383,11 +367,6 @@ public class ConverterApp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_openFileActionPerformed
 
-    private void convertTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertTxtActionPerformed
-        // TODO add your handling code here:
-        convertToTxt(pathFileAwal.getText());
-    }//GEN-LAST:event_convertTxtActionPerformed
-
     private void convertDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertDocActionPerformed
         // TODO add your handling code here:
         convertToDoc(pathFileAwal.getText());
@@ -395,6 +374,7 @@ public class ConverterApp extends javax.swing.JFrame {
 
     private void convertDocxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertDocxActionPerformed
         // TODO add your handling code here:
+        convertToDocx(pathFileAwal.getText());
     }//GEN-LAST:event_convertDocxActionPerformed
 
     /**
@@ -435,7 +415,6 @@ public class ConverterApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton convertDoc;
     private javax.swing.JButton convertDocx;
-    private javax.swing.JButton convertTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
