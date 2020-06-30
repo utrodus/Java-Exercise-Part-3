@@ -42,11 +42,11 @@ public class ConverterApp extends javax.swing.JFrame {
         chooser.setFileFilter(new FileNameExtensionFilter(".doc", "doc"));
         int buka_dialog = chooser.showSaveDialog(ConverterApp.this);
         if (buka_dialog == JFileChooser.APPROVE_OPTION) {
-            String filename = chooser.getSelectedFile().toString();
-            if (!filename.endsWith(".doc")) {
-                filename += ".doc";
+            String filePath = chooser.getSelectedFile().toString();
+            if (!filePath.endsWith(".doc")) {
+                filePath += ".doc";
             }
-            pathFileAkhir.setText(filename);
+            pathFileAkhir.setText(filePath);
 
             String line = null;
             ArrayList textFile = new ArrayList();
@@ -59,7 +59,7 @@ public class ConverterApp extends javax.swing.JFrame {
                     textFile.add(line);
                 }
                 bufferedReader.close();
-                WriteDoc(filename, textFile);
+                WriteDoc(filePath, textFile);
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "File Tidak Ada");
@@ -73,11 +73,11 @@ public class ConverterApp extends javax.swing.JFrame {
         chooser.setFileFilter(new FileNameExtensionFilter(".docx", "docx"));
         int buka_dialog = chooser.showSaveDialog(ConverterApp.this);
         if (buka_dialog == JFileChooser.APPROVE_OPTION) {
-            String filename = chooser.getSelectedFile().toString();
-            if (!filename.endsWith(".docx")) {
-                filename += ".docx";
+            String filePath = chooser.getSelectedFile().toString();
+            if (!filePath.endsWith(".docx")) {
+                filePath += ".docx";
             }
-            pathFileAkhir.setText(filename);
+            pathFileAkhir.setText(filePath);
 
             // Baca File Txt
             String line = null;
@@ -90,7 +90,7 @@ public class ConverterApp extends javax.swing.JFrame {
                     textFile.add(line);
                 }
                 bufferedReader.close();
-                WriteDocx(filename, textFile);
+                WriteDocx(filePath, textFile);
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "File Tidak Ada");
