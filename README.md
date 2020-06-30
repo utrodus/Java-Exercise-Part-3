@@ -9,11 +9,9 @@ Repository ini berisi project dari hasil pertemuan 2-7 yang meliputi :
  5. Pertemuan 6 - Read and Write .docx
  6. Pertemuan 7 - Read and Write .xls
  7. UTS - Aplikasi Konverter txt -> doc & docx
+ 8. UTS - Aplikasi Media Player
+ 
+## Demo Aplikasi :
+https://youtu.be/bNvB-K6VMvI
+https://youtu.be/jSupE5DZn_0
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
