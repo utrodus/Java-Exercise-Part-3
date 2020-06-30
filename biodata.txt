@@ -12,4 +12,4 @@ come.programmer@gmail.com
 come.said
 @come.said
 @saidalbaqi
-/Users/utrodus/Pictures/profil.jpeg
+profil.jpeg

@@ -35,7 +35,6 @@ public class ConverterApp extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         convertDoc.setEnabled(false);
         convertDocx.setEnabled(false);
-
     }
 
     public void convertToDoc(String path) {
@@ -49,10 +48,10 @@ public class ConverterApp extends javax.swing.JFrame {
             }
             pathFileAkhir.setText(filename);
 
-            // Baca File Txt
             String line = null;
             ArrayList textFile = new ArrayList();
             try {
+                // Baca File Txt
                 FileReader fileReader = new FileReader(path);
                 // membaca input file / isi file
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -129,6 +128,7 @@ public class ConverterApp extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
+
     public void WriteDocx(String filePath, ArrayList textFile) {
         try {
 
@@ -198,7 +198,7 @@ public class ConverterApp extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("(.txt -> .doc / .docx)");
+        jLabel6.setText("(.txt ke .doc / .docx)");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
