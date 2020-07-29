@@ -12,7 +12,9 @@ Repository ini berisi project dari hasil pertemuan 2-7 yang meliputi :
  8. UTS - Aplikasi Media Player
  
 ## Demo Aplikasi :
+UTS - Aplikasi Konverter txt -> doc & docx
 https://youtu.be/bNvB-K6VMvI
 
+UTS - Aplikasi Media Player
 https://youtu.be/jSupE5DZn_0
 
