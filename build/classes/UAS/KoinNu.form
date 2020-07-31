@@ -467,6 +467,8 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="cari" min="-2" pref="53" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="resetFilter" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="delete" min="-2" pref="51" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -553,13 +555,18 @@
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="filter" min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="cari" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="filter" max="32767" attributes="0"/>
+                                  <Component id="cari" pref="39" max="32767" attributes="0"/>
+                                  <Component id="resetFilter" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane3" min="-2" pref="250" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="delete" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" min="-2" pref="250" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -782,6 +789,14 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Filter Berdasarkan"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="resetFilter">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reset Filter"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetFilterActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

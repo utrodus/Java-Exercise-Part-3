@@ -101,6 +101,62 @@ public class KoinNu extends javax.swing.JFrame {
 
     }
 
+    public void findByKecamatan(String kecamatan) {
+        DBConnect dBConnect = new DBConnect();
+        dBConnect.Connect();
+        try {
+            String sql = "SELECT * FROM transaksi WHERE kecamatan LIKE '" + kecamatan + "%'";
+            pst = dBConnect.con.prepareStatement(sql);
+            rs = pst.executeQuery(sql);
+            tabelTransaksi.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    public void findByJumlah(int jumlah) {
+        DBConnect dBConnect = new DBConnect();
+        dBConnect.Connect();
+        try {
+            String sql = "SELECT * FROM transaksi WHERE jumlah LIKE '" + jumlah + "%'";
+            pst = dBConnect.con.prepareStatement(sql);
+            rs = pst.executeQuery(sql);
+            tabelTransaksi.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    public void findByKotakInfaq(String kotakInfaq) {
+        DBConnect dBConnect = new DBConnect();
+        dBConnect.Connect();
+        try {
+            String sql = "SELECT * FROM transaksi WHERE kotakinfaq LIKE '" + kotakInfaq + "%'";
+            pst = dBConnect.con.prepareStatement(sql);
+            rs = pst.executeQuery(sql);
+            tabelTransaksi.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    public void findByTgl(String tgl) {
+        DBConnect dBConnect = new DBConnect();
+        dBConnect.Connect();
+        try {
+            String sql = "SELECT * FROM transaksi WHERE tgltransaksi LIKE '" + tgl + "%'";
+            pst = dBConnect.con.prepareStatement(sql);
+            rs = pst.executeQuery(sql);
+            tabelTransaksi.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,6 +207,7 @@ public class KoinNu extends javax.swing.JFrame {
         ubah = new javax.swing.JButton();
         filter = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
+        resetFilter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(246, 250, 249));
@@ -471,6 +528,13 @@ public class KoinNu extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(51, 51, 51));
         jLabel14.setText("Filter Berdasarkan");
 
+        resetFilter.setText("Reset Filter");
+        resetFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetFilterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelcard2Layout = new javax.swing.GroupLayout(panelcard2);
         panelcard2.setLayout(panelcard2Layout);
         panelcard2Layout.setHorizontalGroup(
@@ -494,6 +558,8 @@ public class KoinNu extends javax.swing.JFrame {
                                     .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(resetFilter)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -559,12 +625,15 @@ public class KoinNu extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelcard2Layout.createSequentialGroup()
+                        .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(filter)
+                            .addComponent(cari, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                            .addComponent(resetFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         cardpanel.add(panelcard2, "panelcard2");
@@ -624,6 +693,23 @@ public class KoinNu extends javax.swing.JFrame {
 
     private void cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariActionPerformed
         // TODO add your handling code here:
+        switch (filter.getSelectedIndex()) {
+            case 0:
+                findByKecamatan(String.valueOf(field_kecamatan.getSelectedItem()));
+                break;
+            case 1:
+                findByJumlah(Integer.valueOf(field_jumlah.getText()));
+                break;
+            case 2:
+                findByKotakInfaq(field_kotakinfaq.getText());
+                break;
+            case 3:
+                findByTgl(field_tgl.getText());
+                break;
+
+            default:
+                break;
+        }
     }//GEN-LAST:event_cariActionPerformed
 
     private void ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahActionPerformed
@@ -707,6 +793,11 @@ public class KoinNu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabelTransaksiMouseClicked
 
+    private void resetFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetFilterActionPerformed
+        // TODO add your handling code here:
+        showTableTransaksi();
+    }//GEN-LAST:event_resetFilterActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -778,6 +869,7 @@ public class KoinNu extends javax.swing.JFrame {
     private javax.swing.JLabel nama;
     private javax.swing.JPanel panelcard1;
     private javax.swing.JPanel panelcard2;
+    private javax.swing.JButton resetFilter;
     private javax.swing.JPanel sideBar;
     private javax.swing.JButton simpan;
     private javax.swing.JTable tabelDashboard;
