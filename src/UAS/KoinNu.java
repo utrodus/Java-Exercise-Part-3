@@ -641,7 +641,7 @@ public class KoinNu extends javax.swing.JFrame {
             if (jumlahTransaksi < jumlahAwal) {
                 totalTransaksi = totalTransaksi - jumlahAwal + jumlahTransaksi;
             } else if (jumlahTransaksi > jumlahAwal) {
-                totalTransaksi += jumlahTransaksi;
+                totalTransaksi = totalTransaksi + jumlahTransaksi - jumlahAwal;
             }
             up.update(noIndex, fieldKecamatan, jumlahTransaksi, fieldTgl, fieldKotakInfaq, totalTransaksi);
             resetField();
