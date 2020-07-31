@@ -38,6 +38,7 @@ public class KoinNu extends javax.swing.JFrame {
     }
 
     int totalTransaksi = 0;
+    int totalTransaksiAwal = 0;
     int jumlahAwal = 0;
     int noIndex;
 
@@ -254,7 +255,7 @@ public class KoinNu extends javax.swing.JFrame {
 
         cardpanel.setLayout(new java.awt.CardLayout());
 
-        panelcard1.setBackground(new java.awt.Color(255, 255, 255));
+        panelcard1.setBackground(new java.awt.Color(247, 249, 251));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(61, 190, 181));
@@ -575,7 +576,7 @@ public class KoinNu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(sideBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cardpanel, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
+                .addComponent(cardpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -638,12 +639,17 @@ public class KoinNu extends javax.swing.JFrame {
 
             int jumlahTransaksi = Integer.parseInt(fieldJumlah);
 
-            if (jumlahTransaksi < jumlahAwal) {
-                totalTransaksi = totalTransaksi - jumlahAwal + jumlahTransaksi;
-            } else if (jumlahTransaksi > jumlahAwal) {
-                totalTransaksi = totalTransaksi + jumlahTransaksi - jumlahAwal;
+            if (jumlahAwal == jumlahTransaksi) {
+                totalTransaksi = totalTransaksiAwal;
+            } else {
+                if (jumlahTransaksi < jumlahAwal) {
+                    totalTransaksi = totalTransaksi - jumlahAwal + jumlahTransaksi;
+                } else if (jumlahTransaksi > jumlahAwal) {
+                    totalTransaksi = totalTransaksi + jumlahTransaksi - jumlahAwal;
+                }
             }
-            up.update(noIndex, fieldKecamatan, jumlahTransaksi, fieldTgl, fieldKotakInfaq, totalTransaksi);
+
+            up.updateAllData(noIndex, fieldKecamatan, jumlahTransaksi, fieldTgl, fieldKotakInfaq, totalTransaksi);
             resetField();
             showTableTransaksi();
             getTotalTransaksi();
@@ -656,6 +662,15 @@ public class KoinNu extends javax.swing.JFrame {
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
+        Delete del = new Delete();
+        Update up = new Update();
+
+        int ubahtotalTransaksi = totalTransaksiAwal - jumlahAwal;
+        up.updateTotal(noIndex, ubahtotalTransaksi);
+        del.delete(noIndex);
+        resetField();
+        showTableTransaksi();
+        getTotalTransaksi();
     }//GEN-LAST:event_deleteActionPerformed
 
     private void tabelTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelTransaksiMouseClicked
@@ -674,6 +689,7 @@ public class KoinNu extends javax.swing.JFrame {
             while (rs.next()) {
                 noIndex = rs.getInt("No");
                 jumlahAwal = rs.getInt("jumlah");
+                totalTransaksiAwal = rs.getInt("totalTransaksi");
                 field_jumlah.setText(String.valueOf(rs.getInt("jumlah")));
                 field_kotakinfaq.setText(rs.getString("kotakinfaq"));
                 field_tgl.setText(rs.getString("tgltransaksi"));

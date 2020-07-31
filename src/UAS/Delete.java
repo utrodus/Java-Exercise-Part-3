@@ -4,28 +4,30 @@
  * and open the template in the editor.
  */
 package UAS;
+
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author utrodus
  */
 public class Delete {
-    
-    DBConnect konek = new DBConnect();
-    public void delete(int nim) {
+
+    DBConnect dbConnect = new DBConnect();
+
+    public void delete(int no) {
 
         try {
-            
-            konek.Connect();
-            Statement statement = konek.con.createStatement();
+            dbConnect.Connect();
+            Statement statement = dbConnect.con.createStatement();
 
-            String sql = "DELETE FROM identitas WHERE nim =" + nim  ;
+            String sql = "DELETE FROM transaksi WHERE No =" + no;
 
             statement.executeUpdate(sql);
             statement.close();
 
-            JOptionPane.showMessageDialog(null, "Berhasil Dihapus");
+            JOptionPane.showMessageDialog(null, "Sukses Menghapus Data");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }

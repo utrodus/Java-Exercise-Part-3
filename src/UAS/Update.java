@@ -16,7 +16,7 @@ public class Update {
 
     DBConnect konek = new DBConnect();
 
-    public void update(int no, String kecamatan, int jumlah, String tgl, String kotakinfaq, int total) {
+    public void updateAllData(int no, String kecamatan, int jumlah, String tgl, String kotakinfaq, int total) {
 
         try {
 
@@ -37,6 +37,22 @@ public class Update {
             statement.close();
 
             JOptionPane.showMessageDialog(null, "Berhasil Diubah");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    public void updateTotal(int no, int total) {
+
+        try {
+            konek.Connect();
+            Statement statement = konek.con.createStatement();
+
+            String sql_total = "update transaksi set totaltransaksi='" + total + "'where No='" + no + "'";
+            statement.executeUpdate(sql_total);
+            statement.close();
+
+//            JOptionPane.showMessageDialog(null, "Berhasil Diubah");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }

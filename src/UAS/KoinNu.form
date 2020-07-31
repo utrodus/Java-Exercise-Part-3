@@ -29,7 +29,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="sideBar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="cardpanel" pref="564" max="32767" attributes="0"/>
+              <Component id="cardpanel" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -225,7 +225,7 @@
         <Container class="javax.swing.JPanel" name="panelcard1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="fb" green="f9" red="f7" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
