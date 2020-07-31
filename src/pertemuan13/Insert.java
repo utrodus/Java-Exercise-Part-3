@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author dell
+ * @author utrodus
  */
 public class Insert {
 

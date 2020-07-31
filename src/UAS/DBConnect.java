@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pertemuan13;
+package UAS;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.sql.Connection;
  *
  * @author utrodus
  */
-public class Koneksi {
+public class DBConnect {
 
     /**
      * @param args the command line arguments
@@ -20,17 +20,17 @@ public class Koneksi {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        Koneksi tesDatabase = new Koneksi();
-        tesDatabase.koneksi();
+        DBConnect tesDatabase = new DBConnect();
+        tesDatabase.Connect();
     }
 
     Connection con = null;
 
     String statusKoneksi;
 
-    public void koneksi() {
+    public void Connect() {
         try {
-            String connectionURL = "jdbc:mysql://localhost:8889/mahasiswa";
+            String connectionURL = "jdbc:mysql://localhost:8889/koin_nu";
             String username = "root";
             String password = "root";
             Class.forName("com.mysql.jdbc.Driver");
@@ -39,7 +39,7 @@ public class Koneksi {
             statusKoneksi = "Terhubung";
         } catch (Exception e) {
             System.out.println(e);
-            statusKoneksi = "Gagal Terhubung";
+            statusKoneksi = "Gagal Terhubung Database";
             System.exit(0);
         }
     }

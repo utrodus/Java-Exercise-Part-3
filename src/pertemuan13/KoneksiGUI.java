@@ -459,10 +459,11 @@ public class KoneksiGUI extends javax.swing.JFrame {
                     .addComponent(cariBerdasarkan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Reset))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(hapus)
-                    .addComponent(simpan)
-                    .addComponent(update))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(simpan)
+                        .addComponent(update)))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 

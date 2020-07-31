@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pertemuan13;
+package UAS;
+
 
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -14,13 +15,13 @@ import javax.swing.JOptionPane;
  */
 public class Update {
 
-    Koneksi konek = new Koneksi();
+    DBConnect konek = new DBConnect();
 
     public void update(int nim, String nama, String alamat, String jk) {
 
         try {
 
-            konek.koneksi();
+            konek.Connect();
             Statement statement = konek.con.createStatement();
 
             
