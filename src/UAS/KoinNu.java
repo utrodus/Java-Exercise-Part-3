@@ -54,12 +54,25 @@ public class KoinNu extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         total = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelDashboard = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         panelcard2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
+        field_jumlah = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        field_kecamatan = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        field_komplong = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        field_tgl = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        simpan = new javax.swing.JButton();
+        cari = new javax.swing.JButton();
+        reset = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabelTransaksi = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(246, 250, 249));
@@ -180,11 +193,11 @@ public class KoinNu extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setText("Total Transaksi Saat Ini Sebesar :");
 
-        total.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        total.setFont(new java.awt.Font("Open Sans", 0, 20)); // NOI18N
         total.setForeground(new java.awt.Color(0, 102, 102));
         total.setText("Rp. 0");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelDashboard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -214,7 +227,7 @@ public class KoinNu extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelDashboard);
 
         jLabel9.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
@@ -225,26 +238,29 @@ public class KoinNu extends javax.swing.JFrame {
         panelcard1Layout.setHorizontalGroup(
             panelcard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelcard1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelcard1Layout.createSequentialGroup()
                 .addGroup(panelcard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelcard1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelcard1Layout.createSequentialGroup()
                         .addGroup(panelcard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelcard1Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel1))
+                                .addGap(16, 16, 16)
+                                .addGroup(panelcard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(total)
+                                    .addComponent(jLabel8)))
                             .addGroup(panelcard1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(panelcard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(panelcard1Layout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addGroup(panelcard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(total)
-                                            .addComponent(jLabel8))))))
-                        .addGap(0, 9, Short.MAX_VALUE))
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 18, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelcard1Layout.setVerticalGroup(
@@ -256,15 +272,15 @@ public class KoinNu extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(total)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
+                .addComponent(total)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         cardpanel.add(panelcard1, "panelcard1");
@@ -281,20 +297,112 @@ public class KoinNu extends javax.swing.JFrame {
         jSeparator3.setForeground(new java.awt.Color(204, 204, 204));
         jSeparator3.setPreferredSize(new java.awt.Dimension(50, 13));
 
+        jLabel10.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel10.setText("Kecamatan");
+
+        field_kecamatan.setBackground(new java.awt.Color(255, 255, 255));
+        field_kecamatan.setForeground(new java.awt.Color(0, 153, 153));
+        field_kecamatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kepanjenkidul", "Sananwetan", "Sukorejo" }));
+
+        jLabel11.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel11.setText("Jumlah Transaksi");
+
+        jLabel12.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel12.setText("No. Komplong");
+
+        jLabel13.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel13.setText("Tgl Transaksi (*tgl-bln-tahun)");
+
+        simpan.setBackground(new java.awt.Color(0, 102, 102));
+        simpan.setForeground(new java.awt.Color(255, 255, 255));
+        simpan.setText("Simpan Data");
+
+        cari.setBackground(new java.awt.Color(0, 102, 204));
+        cari.setForeground(new java.awt.Color(255, 255, 255));
+        cari.setText("Cari Data");
+
+        reset.setBackground(new java.awt.Color(255, 51, 51));
+        reset.setForeground(new java.awt.Color(255, 255, 255));
+        reset.setText("Reset Form");
+
+        tabelTransaksi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Jumlah Transaksi", "Kecamatan", "Nama Kotak Infaq", "Tanggal Transaksi"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tabelTransaksi);
+
         javax.swing.GroupLayout panelcard2Layout = new javax.swing.GroupLayout(panelcard2);
         panelcard2.setLayout(panelcard2Layout);
         panelcard2Layout.setHorizontalGroup(
             panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelcard2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelcard2Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelcard2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panelcard2Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel10)
+                                    .addComponent(field_kecamatan, 0, 205, Short.MAX_VALUE)
+                                    .addComponent(field_jumlah))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(field_komplong, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(field_tgl, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13))
+                                .addGap(71, 71, 71)))))
                 .addContainerGap())
             .addGroup(panelcard2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelcard2Layout.createSequentialGroup()
+                        .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(simpan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(reset)))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         panelcard2Layout.setVerticalGroup(
             panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,7 +413,31 @@ public class KoinNu extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(511, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(field_komplong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(field_kecamatan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(field_tgl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(field_jumlah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         cardpanel.add(panelcard2, "panelcard2");
@@ -377,10 +509,19 @@ public class KoinNu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTransaksi;
     private javax.swing.JPanel cardpanel;
+    private javax.swing.JButton cari;
     private javax.swing.JLabel createdBy;
     private javax.swing.JLabel createdBy1;
+    private javax.swing.JTextField field_jumlah;
+    private javax.swing.JComboBox<String> field_kecamatan;
+    private javax.swing.JTextField field_komplong;
+    private javax.swing.JTextField field_tgl;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -390,14 +531,18 @@ public class KoinNu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel nama;
     private javax.swing.JPanel panelcard1;
     private javax.swing.JPanel panelcard2;
+    private javax.swing.JButton reset;
     private javax.swing.JPanel sideBar;
+    private javax.swing.JButton simpan;
+    private javax.swing.JTable tabelDashboard;
+    private javax.swing.JTable tabelTransaksi;
     private javax.swing.JLabel total;
     // End of variables declaration//GEN-END:variables
 }
