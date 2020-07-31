@@ -49,18 +49,20 @@ public class KoinNu extends javax.swing.JFrame {
     }
 
     public void getTotalTransaksi() {
+        int totalTransaksiBaru = 0;
         // Inisiasi Koneksi Database
         DBConnect dbconnect = new DBConnect();
         dbconnect.Connect();
 
         try {
-            String sql = "SELECT totaltransaksi FROM transaksi ORDER BY No DESC LIMIT 1";
+            String sql = "SELECT jumlah FROM transaksi";
             pst = dbconnect.con.prepareStatement(sql);
             rs = pst.executeQuery(sql);
             while (rs.next()) {
-                totalTransaksi = rs.getInt("totaltransaksi");
+                totalTransaksiBaru += rs.getInt("jumlah");
             }
-            total.setText(String.valueOf(totalTransaksi));
+            System.out.println(totalTransaksiBaru);
+            total.setText(String.valueOf(totalTransaksiBaru));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -659,6 +661,7 @@ public class KoinNu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         cardLayout.show(cardpanel, "panelcard1");
+        getTotalTransaksi();
         showTableDashboard();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -730,8 +733,10 @@ public class KoinNu extends javax.swing.JFrame {
             } else {
                 if (jumlahTransaksi < jumlahAwal) {
                     totalTransaksi = totalTransaksi - jumlahAwal + jumlahTransaksi;
+
                 } else if (jumlahTransaksi > jumlahAwal) {
                     totalTransaksi = totalTransaksi + jumlahTransaksi - jumlahAwal;
+
                 }
             }
 
