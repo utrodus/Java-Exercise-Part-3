@@ -5,7 +5,6 @@
  */
 package UAS;
 
-
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
@@ -17,22 +16,24 @@ public class Update {
 
     DBConnect konek = new DBConnect();
 
-    public void update(int nim, String nama, String alamat, String jk) {
+    public void update(int no, String kecamatan, int jumlah, String tgl, String kotakinfaq, int total) {
 
         try {
 
             konek.Connect();
             Statement statement = konek.con.createStatement();
 
-            
-            String sql_nama = "update identitas set nama='" + nama + "'where nim='" + nim + "'";
-            String sql_alamat = "update identitas set alamat='" + alamat + "'where nim='" + nim + "'";
-            String sql_jenis = "update identitas set jeniskelamin='" + jk + "'where nim='" + nim + "'";
+            String sql_kecamatan = "update transaksi set kecamatan='" + kecamatan + "'where No='" + no + "'";
+            String sql_jumlah = "update transaksi set jumlah='" + jumlah + "'where No='" + no + "'";
+            String sql_tgl = "update transaksi set tgltransaksi='" + tgl + "'where No='" + no + "'";
+            String sql_kotak = "update transaksi set kotakinfaq='" + kotakinfaq + "'where No='" + no + "'";
+            String sql_total = "update transaksi set totaltransaksi='" + total + "'where No='" + no + "'";
 
-            
-            statement.executeUpdate(sql_nama);
-            statement.executeUpdate(sql_alamat);
-            statement.executeUpdate(sql_jenis);
+            statement.executeUpdate(sql_kecamatan);
+            statement.executeUpdate(sql_jumlah);
+            statement.executeUpdate(sql_tgl);
+            statement.executeUpdate(sql_kotak);
+            statement.executeUpdate(sql_total);
             statement.close();
 
             JOptionPane.showMessageDialog(null, "Berhasil Diubah");

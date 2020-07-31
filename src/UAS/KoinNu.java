@@ -9,6 +9,7 @@ import java.awt.CardLayout;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -33,14 +34,35 @@ public class KoinNu extends javax.swing.JFrame {
 //                + "Koin Nu Kota Blitar");
         showTableTransaksi();
         showTableDashboard();
+        getTotalTransaksi();
     }
 
     int totalTransaksi = 0;
+    int jumlahAwal = 0;
+    int noIndex;
 
     public void resetField() {
         field_jumlah.setText("");
         field_kotakinfaq.setText("");
         field_tgl.setText("");
+    }
+
+    public void getTotalTransaksi() {
+        // Inisiasi Koneksi Database
+        DBConnect dbconnect = new DBConnect();
+        dbconnect.Connect();
+
+        try {
+            String sql = "SELECT totaltransaksi FROM transaksi ORDER BY No DESC LIMIT 1";
+            pst = dbconnect.con.prepareStatement(sql);
+            rs = pst.executeQuery(sql);
+            while (rs.next()) {
+                totalTransaksi = rs.getInt("totaltransaksi");
+            }
+            total.setText(String.valueOf(totalTransaksi));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 
     public void showTableDashboard() {
@@ -107,6 +129,7 @@ public class KoinNu extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelDashboard = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
+        total1 = new javax.swing.JLabel();
         panelcard2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -249,7 +272,7 @@ public class KoinNu extends javax.swing.JFrame {
 
         total.setFont(new java.awt.Font("Open Sans", 0, 20)); // NOI18N
         total.setForeground(new java.awt.Color(0, 102, 102));
-        total.setText("Rp. 0");
+        total.setText("0");
 
         tabelDashboard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -287,6 +310,10 @@ public class KoinNu extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
         jLabel9.setText("Data Detail Transaksi");
 
+        total1.setFont(new java.awt.Font("Open Sans", 0, 20)); // NOI18N
+        total1.setForeground(new java.awt.Color(0, 102, 102));
+        total1.setText("Rp.");
+
         javax.swing.GroupLayout panelcard1Layout = new javax.swing.GroupLayout(panelcard1);
         panelcard1.setLayout(panelcard1Layout);
         panelcard1Layout.setHorizontalGroup(
@@ -304,8 +331,11 @@ public class KoinNu extends javax.swing.JFrame {
                             .addGroup(panelcard1Layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
                                 .addGroup(panelcard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(total)
-                                    .addComponent(jLabel8)))
+                                    .addComponent(jLabel8)
+                                    .addGroup(panelcard1Layout.createSequentialGroup()
+                                        .addComponent(total1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(total))))
                             .addGroup(panelcard1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel9)))
@@ -325,12 +355,14 @@ public class KoinNu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(total)
+                .addGroup(panelcard1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(total1)
+                    .addComponent(total))
                 .addGap(41, 41, 41)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         cardpanel.add(panelcard1, "panelcard1");
@@ -339,7 +371,7 @@ public class KoinNu extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(61, 190, 181));
-        jLabel4.setText("Tambah Data Transaksi Koin Nu Blitar");
+        jLabel4.setText("Tambah Data Transaksi Koin Nu Kota Blitar");
 
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UAS/assets/calculator.png"))); // NOI18N
@@ -361,7 +393,7 @@ public class KoinNu extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel12.setText("No. Kotak Infaq");
+        jLabel12.setText("Nama Kotak Infaq");
 
         jLabel13.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(51, 51, 51));
@@ -414,6 +446,11 @@ public class KoinNu extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tabelTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelTransaksiMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tabelTransaksi);
 
         ubah.setBackground(new java.awt.Color(230, 126, 34));
@@ -444,7 +481,7 @@ public class KoinNu extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
-                        .addGap(0, 86, Short.MAX_VALUE))
+                        .addGap(0, 30, Short.MAX_VALUE))
                     .addGroup(panelcard2Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(panelcard2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -538,7 +575,7 @@ public class KoinNu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(sideBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cardpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(cardpanel, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -552,11 +589,13 @@ public class KoinNu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         cardLayout.show(cardpanel, "panelcard1");
+        showTableDashboard();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void addTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTransaksiActionPerformed
         // TODO add your handling code here:
         cardLayout.show(cardpanel, "panelcard2");
+        resetField();
     }//GEN-LAST:event_addTransaksiActionPerformed
 
     private void simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanActionPerformed
@@ -574,6 +613,7 @@ public class KoinNu extends javax.swing.JFrame {
             in.addData(fieldKecamatan, jumlahTransaksi, fieldKotakInfaq, fieldTgl, totalTransaksi);
             resetField();
             showTableTransaksi();
+            getTotalTransaksi();
         } else {
             JOptionPane.showMessageDialog(null, "Form Masih Ada Yang Kosong!",
                     "Mohon Maaf !", JOptionPane.ERROR_MESSAGE);
@@ -587,11 +627,69 @@ public class KoinNu extends javax.swing.JFrame {
 
     private void ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahActionPerformed
         // TODO add your handling code here:
+        Update up = new Update();
+        String fieldKecamatan = String.valueOf(field_kecamatan.getSelectedItem());
+        String fieldJumlah = field_jumlah.getText();
+        String fieldTgl = field_tgl.getText();
+        String fieldKotakInfaq = field_kotakinfaq.getText();
+
+        // Cek Apakah Field masih ada yang kosong    
+        if (!fieldJumlah.isEmpty() && !fieldTgl.isEmpty() && !fieldKotakInfaq.isEmpty()) {
+
+            int jumlahTransaksi = Integer.parseInt(fieldJumlah);
+
+            if (jumlahTransaksi < jumlahAwal) {
+                totalTransaksi = totalTransaksi - jumlahAwal + jumlahTransaksi;
+            } else if (jumlahTransaksi > jumlahAwal) {
+                totalTransaksi += jumlahTransaksi;
+            }
+            up.update(noIndex, fieldKecamatan, jumlahTransaksi, fieldTgl, fieldKotakInfaq, totalTransaksi);
+            resetField();
+            showTableTransaksi();
+            getTotalTransaksi();
+        } else {
+            JOptionPane.showMessageDialog(null, "Form Masih Ada Yang Kosong!",
+                    "Mohon Maaf !", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_ubahActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteActionPerformed
+
+    private void tabelTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelTransaksiMouseClicked
+        // TODO add your handling code here:
+        DBConnect dBConnect = new DBConnect();
+        dBConnect.Connect();
+
+        DefaultTableModel dtm = (DefaultTableModel) tabelTransaksi.getModel();
+        int selectRowIndex = tabelTransaksi.getSelectedRow();
+        int id = (int) dtm.getValueAt(selectRowIndex, 0);
+        try {
+            String sql = "select * from transaksi where No like " + id;
+            pst = dBConnect.con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery(sql);
+
+            while (rs.next()) {
+                noIndex = rs.getInt("No");
+                jumlahAwal = rs.getInt("jumlah");
+                field_jumlah.setText(String.valueOf(rs.getInt("jumlah")));
+                field_kotakinfaq.setText(rs.getString("kotakinfaq"));
+                field_tgl.setText(rs.getString("tgltransaksi"));
+                String kecamatan = rs.getString("kecamatan");
+                if (kecamatan.equals("Kepanjenkidul")) {
+                    field_kecamatan.setSelectedIndex(0);
+                } else if (kecamatan.equals("Sananwetan")) {
+                    field_kecamatan.setSelectedIndex(1);
+                } else if (kecamatan.equals("Suklorejo")) {
+                    field_kecamatan.setSelectedIndex(2);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_tabelTransaksiMouseClicked
 
     /**
      * @param args the command line arguments
@@ -669,6 +767,7 @@ public class KoinNu extends javax.swing.JFrame {
     private javax.swing.JTable tabelDashboard;
     private javax.swing.JTable tabelTransaksi;
     private javax.swing.JLabel total;
+    private javax.swing.JLabel total1;
     private javax.swing.JButton ubah;
     // End of variables declaration//GEN-END:variables
 }
